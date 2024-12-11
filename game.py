@@ -2,7 +2,6 @@ import pygame
 from random import randint
 from objects import Board, Button
 
-### SETUP *********************************************************************
 pygame.init()
 SCREEN = WIDTH, HEIGHT = 890, 480
 win = pygame.display.set_mode(SCREEN, pygame.NOFRAME)
@@ -14,13 +13,11 @@ FPS = 30
 ROWS, COLS = 8, 10
 TILESIZE = 45
 
-### COLORS ********************************************************************
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
 RED = (255, 25, 25)
 WHITE = (255, 255, 255)
 
-### LOADING IMAGES ************************************************************
 img_list = []
 for img in range(1, 21):
     image = pygame.image.load(f"Assets/icons/{img}.jpg")
@@ -32,24 +29,20 @@ game_won = pygame.image.load('Assets/won.png')
 rightbar = pygame.image.load('Assets/image.jpg')
 rightbar = pygame.transform.scale(rightbar, (280, HEIGHT - 47))
 
-### Buttons *******************************************************************
 restart_img = pygame.image.load('Assets/restart.png')
 restart_btn = Button(restart_img, (40, 40), 720, 230)
 
 close_img = pygame.image.load('Assets/close.png')
 close_btn = Button(close_img, (40, 40), 720, 280)
 
-### LOADING FONTS *************************************************************
 sys_font = pygame.font.SysFont(("Times New Roman"), 20)
 clicks_font = pygame.font.SysFont(("Algerian"), 30)
 
-### CREATING BOARD ************************************************************
 board = Board(img_list)
 board.randomize_images()
 
 animated_boxes = [(randint(0, 7), randint(0, 9)) for i in range(20)]
 
-### GAME VARIABLES ************************************************************
 game_screen = True
 first_card = None
 second_card = None
@@ -71,7 +64,6 @@ while running:
     pygame.draw.rect(win, BLUE, (5, 10, 580, HEIGHT - 20), 2)
     pygame.draw.rect(win, BLUE, (585, 10, 300, HEIGHT - 20), 2)
 
-    # Restart Button
     if restart_btn.draw(win):
         game_screen = True
         first_card = None
@@ -88,7 +80,6 @@ while running:
         numCards = 80
         gameWon = False
 
-    # Close Button
     if close_btn.draw(win):
         running = False
 
@@ -106,7 +97,6 @@ while running:
                 x, y = pygame.mouse.get_pos()
 
     if game_screen:
-        # Game logic here...
         if numCards == 0:
             gameWon = True
 
@@ -167,7 +157,6 @@ while running:
                 else:
                     clicked = False
 
-            # Displaying cards
             for r in range(ROWS):
                 for c in range(COLS):
                     border = False
